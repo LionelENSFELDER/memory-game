@@ -18,7 +18,7 @@ function App() {
       setTimeout(() => {
         setCurrentCards([...a]);
         setSelectedCards([]);
-      }, 1000);
+      }, 500);
     }
   };
 

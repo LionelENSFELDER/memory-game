@@ -1,25 +1,25 @@
 import shuffleArray from "../utils/shuffle";
 
-import aurelia from "../assets/img/default-cards/aurelia.svg";
-import angular from "../assets/img/default-cards/angular.svg";
-import ember from "../assets/img/default-cards/ember.svg";
-import vue from "../assets/img/default-cards/vue.svg";
-import backbone from "../assets/img/default-cards/backbone.svg";
-import react from "../assets/img/default-cards/react.svg";
+import blue from "../assets/img/katuri/blue.jpg";
+import brown from "../assets/img/katuri/brown.jpg";
+import family from "../assets/img/katuri/family.jpg";
+import mum from "../assets/img/katuri/mum.jpg";
+import pink from "../assets/img/katuri/pink.jpg";
+import yellow from "../assets/img/katuri/yellow.jpg";
 
 const cards = [
-  { id: 1, name: "aurelia", image: aurelia },
-  { id: 2, name: "aurelia", image: aurelia },
-  { id: 3, name: "angular", image: angular },
-  { id: 4, name: "angular", image: angular },
-  { id: 5, name: "ember", image: ember },
-  { id: 6, name: "ember", image: ember },
-  { id: 7, name: "vue", image: vue },
-  { id: 8, name: "vue", image: vue },
-  { id: 9, name: "backbone", image: backbone },
-  { id: 10, name: "backbone", image: backbone },
-  { id: 11, name: "react", image: react },
-  { id: 12, name: "react", image: react },
+  { id: 1, name: "blue", image: blue },
+  { id: 2, name: "blue", image: blue },
+  { id: 3, name: "brown", image: brown },
+  { id: 4, name: "brown", image: brown },
+  { id: 5, name: "family", image: family },
+  { id: 6, name: "family", image: family },
+  { id: 7, name: "mum", image: mum },
+  { id: 8, name: "mum", image: mum },
+  { id: 9, name: "pink", image: pink },
+  { id: 10, name: "pink", image: pink },
+  { id: 11, name: "yellow", image: yellow },
+  { id: 12, name: "yellow", image: yellow },
 ];
 
 const cardsData = cards.map((card) => ({

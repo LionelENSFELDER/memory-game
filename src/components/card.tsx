@@ -1,4 +1,4 @@
-import defaultBackground from "../assets/img/default-background.jpg";
+import defaultBackground from "../assets/img/katuri/back.jpg";
 
 const Card = ({ card, onClick }) => {
   return (
