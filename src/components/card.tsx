@@ -1,15 +1,34 @@
-import defaultBackground from "../assets/img/katuri/back.jpg";
+import backFaceLight from "../assets/img/back-face-light.jpg";
+import backFaceDark from "../assets/img/back-face-dark.jpg";
+
+const currentTheme = "light"; // TODO : make color theme switcher
+const backFace = currentTheme === "light" ? backFaceLight : backFaceDark;
 
 const Card = ({ card, onClick }) => {
   return (
     <div
-      className="text-white h-auto max-w-full rounded-lg block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+      className={`
+      h-56 w-40 
+      text-white 
+      max-w-full 
+      rounded-lg 
+      block 
+      p-2 
+      bg-zinc-100
+      hover:bg-gray-100 
+      dark:bg-neutral-900 
+      dark:border-gray-700 
+      dark:hover:bg-gray-700 
+      duration-500 
+      memory-card 
+      hover:drop-shadow-xl${card.isFlipped ? " flip" : ""}
+      `}
       onClick={onClick}
       data-testid={card.id}
     >
       <img
-        className="front-face"
-        src={card.isFlipped ? card.image : defaultBackground}
+        className="rounded-lg w-full h-full object-scale-down"
+        src={card.isFlipped ? card.image : backFace}
         alt="Card"
       />
     </div>
