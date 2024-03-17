@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .memory-card {
-  transform: scale(1);
+  transform: scale(0.9);
   transform-style: preserve-3d;
   transition: transform 0.5s;
 }
