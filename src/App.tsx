@@ -4,7 +4,21 @@ import Card from "./components/card";
 import "./App.css";
 
 function App() {
+  const updateCurrentCards = (firtsCardIndex, secondCardIndex) => {
+    const a = currentCards;
+    a[firtsCardIndex].isFlipped = false;
+    a[secondCardIndex].isFlipped = false;
+    setTimeout(() => {
+      setCurrentCards([...a]);
+      setSelectedCards([]);
+    }, 500);
+  };
+
   const checkIfCardsMatch = (firtsCardIndex, secondCardIndex) => {
+    if (currentCards[firtsCardIndex].id === currentCards[secondCardIndex].id) {
+      updateCurrentCards(firtsCardIndex, secondCardIndex);
+    }
+
     if (
       currentCards[firtsCardIndex].name === currentCards[secondCardIndex].name
     ) {
@@ -12,13 +26,7 @@ function App() {
       setSelectedCards([]);
     } else {
       console.log("not match");
-      const a = currentCards;
-      a[firtsCardIndex].isFlipped = false;
-      a[secondCardIndex].isFlipped = false;
-      setTimeout(() => {
-        setCurrentCards([...a]);
-        setSelectedCards([]);
-      }, 500);
+      updateCurrentCards(firtsCardIndex, secondCardIndex);
     }
   };
 
