@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
-import { defaultCardsData } from "./data/default-cards";
+import { CardType } from "./types";
+import { katuriCards as Cards } from "./data/katuri-cards";
 import Card from "./components/card";
 import Navbar from "./components/navbar";
 import "./App.css";
 
 function App() {
-  const updateCurrentCards = (firtsCardIndex, secondCardIndex) => {
+  const updateCurrentCards = (
+    firtsCardIndex: number,
+    secondCardIndex: number
+  ) => {
     const a = currentCards;
     a[firtsCardIndex].isFlipped = false;
     a[secondCardIndex].isFlipped = false;
@@ -15,7 +19,10 @@ function App() {
     }, 500);
   };
 
-  const checkIfCardsMatch = (firtsCardIndex, secondCardIndex) => {
+  const checkIfCardsMatch = (
+    firtsCardIndex: number,
+    secondCardIndex: number
+  ) => {
     if (currentCards[firtsCardIndex].id === currentCards[secondCardIndex].id) {
       updateCurrentCards(firtsCardIndex, secondCardIndex);
     }
@@ -31,8 +38,8 @@ function App() {
     }
   };
 
-  const [currentCards, setCurrentCards] = useState([...defaultCardsData]);
-  const [selectedCards, setSelectedCards] = useState([]);
+  const [currentCards, setCurrentCards] = useState<CardType[]>([...Cards]);
+  const [selectedCards, setSelectedCards] = useState<number[]>([]);
 
   useEffect(() => {
     if (selectedCards.length >= 2) {
@@ -40,7 +47,7 @@ function App() {
     }
   }, [selectedCards]);
 
-  const HandleClick = (event, index) => {
+  const HandleClick = (index: number) => {
     const nextState = [...selectedCards, index];
     setSelectedCards(nextState);
   };
@@ -55,9 +62,9 @@ function App() {
               <Card
                 key={card.id}
                 card={card}
-                onClick={(event) => {
+                onClick={() => {
                   card.isFlipped = true;
-                  HandleClick(event, index);
+                  HandleClick(index);
                 }}
               />
             );
