@@ -53,7 +53,7 @@ function App() {
   };
 
   return (
-    <>
+    <div className="bg-gray-900 sm:h-fit md:h-screen">
       <Navbar />
       <div className="flex justify-center align-middle">
         <div className="p-8 w-fit grid grid-cols-2 md:grid-cols-4 gap-2">
@@ -71,7 +71,7 @@ function App() {
           })}
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
