@@ -1,11 +1,36 @@
 import { useEffect, useState } from "react";
 import { CardType } from "./types";
-import { katuriCards as Cards } from "./data/katuri-cards";
 import Card from "./components/card";
 import Navbar from "./components/navbar";
+import katuriCards from "./data/katuri-cards";
+import frameworksCards from "./data/frameworks-cards";
 import "./App.css";
 
 function App() {
+  const getCardTheme = (theme: string) => {
+    switch (theme) {
+      case "frameworks":
+        return frameworksCards;
+        break;
+      case "katuri":
+        return katuriCards;
+        break;
+      default:
+        return katuriCards;
+        break;
+    }
+  };
+
+  const [cardsTheme, setCardsTheme] = useState<string>("katuri");
+  const handleChangeCardTheme = (theme: string) => {
+    setCardsTheme(theme);
+  };
+
+  const [currentCards, setCurrentCards] = useState<CardType[]>([
+    ...getCardTheme(cardsTheme),
+  ]);
+  const [selectedCards, setSelectedCards] = useState<number[]>([]);
+
   const updateCurrentCards = (
     firtsCardIndex: number,
     secondCardIndex: number
@@ -38,9 +63,6 @@ function App() {
     }
   };
 
-  const [currentCards, setCurrentCards] = useState<CardType[]>([...Cards]);
-  const [selectedCards, setSelectedCards] = useState<number[]>([]);
-
   useEffect(() => {
     if (selectedCards.length >= 2) {
       checkIfCardsMatch(selectedCards[0], selectedCards[1]);
@@ -52,9 +74,13 @@ function App() {
     setSelectedCards(nextState);
   };
 
+  useEffect(() => {
+    setCurrentCards([...getCardTheme(cardsTheme)]);
+  }, [cardsTheme]);
+
   return (
     <div className="bg-gray-900 sm:h-fit md:h-screen">
-      <Navbar />
+      <Navbar setCardsTheme={handleChangeCardTheme} />
       <div className="flex justify-center align-middle">
         <div className="p-8 w-fit grid grid-cols-2 md:grid-cols-4 gap-2">
           {currentCards.map((card, index) => {

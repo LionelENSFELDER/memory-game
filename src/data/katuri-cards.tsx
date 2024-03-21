@@ -22,4 +22,5 @@ const cards: CardType[] = [
   { id: 12, name: "ladybug", image: ladybug, isFlipped: false },
 ];
 
-export const katuriCards = cards.sort(() => Math.random() - 0.5);
+const katuriCards = cards.sort(() => Math.random() - 0.5);
+export default katuriCards;

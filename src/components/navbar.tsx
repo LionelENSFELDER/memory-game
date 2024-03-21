@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { Brain, VolumeX, Volume2, RefreshCcw } from "lucide-react";
 
-const Navbar = () => {
+interface NavbarProps {
+  setCardsTheme: (theme: string) => void;
+}
+const Navbar = ({ setCardsTheme }: NavbarProps) => {
   const [isSoundActive, setIsSoundActive] = useState(true);
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900">
@@ -36,6 +39,22 @@ const Navbar = () => {
         </button>
         <div className="hidden w-full md:block md:w-auto" id="navbar">
           <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+            <li>
+              <form className="max-w-sm mx-auto">
+                <select
+                  onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
+                    setCardsTheme(event.target.value)
+                  }
+                  id="cards-theme"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                >
+                  <option selected value="katuri">
+                    Katuri
+                  </option>
+                  <option value="frameworks">Frameworks</option>
+                </select>
+              </form>
+            </li>
             <li>
               <button
                 type="button"
