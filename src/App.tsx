@@ -5,9 +5,11 @@ import Navbar from "./components/navbar";
 import katuriCards from "./data/katuri-cards";
 import frameworksCards from "./data/frameworks-cards";
 import pawpatrolCards from "./data/pawpatrol-cards";
+import ConfettiExplosion from "react-confetti-explosion";
 import "./App.css";
 
 function App() {
+  const [isExploding, setIsExploding] = useState<boolean>(false);
   const getCardTheme = (theme: string) => {
     switch (theme) {
       case "frameworks":
@@ -35,7 +37,7 @@ function App() {
   ]);
   const [selectedCards, setSelectedCards] = useState<number[]>([]);
 
-  const updateCurrentCards = (
+  const flipNoMatchCards = (
     firtsCardIndex: number,
     secondCardIndex: number
   ) => {
@@ -53,19 +55,25 @@ function App() {
     secondCardIndex: number
   ) => {
     if (currentCards[firtsCardIndex].id === currentCards[secondCardIndex].id) {
-      updateCurrentCards(firtsCardIndex, secondCardIndex);
+      flipNoMatchCards(firtsCardIndex, secondCardIndex);
     }
 
     if (
       currentCards[firtsCardIndex].name === currentCards[secondCardIndex].name
     ) {
       console.log("match");
-      setSelectedCards([]);
+      if (currentCards.every(isElementFlipped)) {
+        setTimeout(() => {
+          setIsExploding(true);
+        }, 600);
+      }
     } else {
       console.log("not match");
-      updateCurrentCards(firtsCardIndex, secondCardIndex);
+      flipNoMatchCards(firtsCardIndex, secondCardIndex);
     }
   };
+
+  const isElementFlipped = (element: CardType) => element.isFlipped === true;
 
   useEffect(() => {
     if (selectedCards.length >= 2) {
@@ -84,6 +92,18 @@ function App() {
 
   return (
     <div className="bg-gray-900 sm:h-fit md:h-screen">
+      {isExploding && (
+        <ConfettiExplosion
+          id="confetti"
+          className="absolute inset-x-0 top-20 h-5"
+          duration={3000}
+          height={"200vh"}
+          width={4000}
+          particleCount={200}
+          particleSize={10}
+          force={1}
+        />
+      )}
       <Navbar setCardsTheme={handleChangeCardTheme} />
       <div className="flex justify-center align-middle">
         <div className="p-8 w-fit grid grid-cols-2 md:grid-cols-4 gap-2">
@@ -101,6 +121,19 @@ function App() {
           })}
         </div>
       </div>
+
+      {/* {isExploding && (
+        <ConfettiExplosion
+          id="confetti2"
+          className="absolute right-0 bottom-0"
+          duration={2000}
+          height={"200vh"}
+          width={4000}
+          particleCount={200}
+          particleSize={10}
+          force={1}
+        />
+      )} */}
     </div>
   );
 }
