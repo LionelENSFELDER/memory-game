@@ -4,6 +4,7 @@ import Card from "./components/card";
 import Navbar from "./components/navbar";
 import katuriCards from "./data/katuri-cards";
 import frameworksCards from "./data/frameworks-cards";
+import pawpatrolCards from "./data/pawpatrol-cards";
 import "./App.css";
 
 function App() {
@@ -14,6 +15,9 @@ function App() {
         break;
       case "katuri":
         return katuriCards;
+        break;
+      case "pawpatrol":
+        return pawpatrolCards;
         break;
       default:
         return katuriCards;

@@ -52,6 +52,7 @@ const Navbar = ({ setCardsTheme }: NavbarProps) => {
                     Katuri
                   </option>
                   <option value="frameworks">Frameworks</option>
+                  <option value="pawpatrol">Paw Patrol</option>
                 </select>
               </form>
             </li>
