@@ -62,6 +62,7 @@ function App() {
       currentCards[firtsCardIndex].name === currentCards[secondCardIndex].name
     ) {
       console.log("match");
+      setSelectedCards([]);
       if (currentCards.every(isElementFlipped)) {
         setTimeout(() => {
           setIsExploding(true);
@@ -76,7 +77,7 @@ function App() {
   const isElementFlipped = (element: CardType) => element.isFlipped === true;
 
   useEffect(() => {
-    if (selectedCards.length >= 2) {
+    if (selectedCards.length == 2) {
       checkIfCardsMatch(selectedCards[0], selectedCards[1]);
     }
   }, [selectedCards]);
@@ -113,8 +114,10 @@ function App() {
                 key={card.id}
                 card={card}
                 onClick={() => {
-                  card.isFlipped = true;
-                  HandleClick(index);
+                  if (selectedCards.length < 2) {
+                    card.isFlipped = true;
+                    HandleClick(index);
+                  }
                 }}
               />
             );
