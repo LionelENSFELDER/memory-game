@@ -6,10 +6,12 @@ import katuriCards from "./data/katuri-cards";
 import frameworksCards from "./data/frameworks-cards";
 import pawpatrolCards from "./data/pawpatrol-cards";
 import Confetti from "./components/confetti";
+import Modal from "./components/win-modal";
 import "./App.css";
 
 function App() {
   const [isExploding, setIsExploding] = useState<boolean>(false);
+  const [IsModalHidden, setIsModalHidden] = useState<boolean>(true);
   const getCardTheme = (theme: string) => {
     switch (theme) {
       case "frameworks":
@@ -66,6 +68,7 @@ function App() {
       if (currentCards.every(isElementFlipped)) {
         setTimeout(() => {
           setIsExploding(true);
+          setIsModalHidden(false);
         }, 600);
       }
     } else {
@@ -93,7 +96,15 @@ function App() {
 
   return (
     <div className="bg-gray-900 sm:h-fit md:h-screen">
-      {isExploding && <Confetti onComplete={() => setIsExploding(false)} />}
+      <Modal isHidden={IsModalHidden} />
+      {isExploding && (
+        <Confetti
+          onComplete={() => {
+            setIsExploding(false);
+            setIsModalHidden(true);
+          }}
+        />
+      )}
       <Navbar setCardsTheme={handleChangeCardTheme} />
       <div className="flex justify-center align-middle">
         <div className="p-8 w-fit grid grid-cols-2 md:grid-cols-4 gap-2">

@@ -9,7 +9,7 @@ const Confetti = ({ onComplete }: ConfettiProps) => {
     <ConfettiExplosion
       id="confetti"
       className="absolute inset-x-0 top-20 h-5"
-      duration={3000}
+      duration={5000}
       height={"200vh"}
       width={4000}
       particleCount={200}
