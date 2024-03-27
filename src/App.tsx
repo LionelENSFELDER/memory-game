@@ -2,92 +2,75 @@ import { useEffect, useState } from "react";
 import { CardType } from "./types";
 import Card from "./components/card";
 import Navbar from "./components/navbar";
-import katuriCards from "./data/katuri-cards";
-import frameworksCards from "./data/frameworks-cards";
-import pawpatrolCards from "./data/pawpatrol-cards";
 import Confetti from "./components/confetti";
 import Modal from "./components/win-modal";
+import getCardTheme from "./theme/get-card-theme";
 import "./App.css";
+
+interface TwoCardsIndexProps {
+  firstIndex: number;
+  secondIndex: number;
+}
 
 function App() {
   const [isExploding, setIsExploding] = useState<boolean>(false);
   const [IsModalHidden, setIsModalHidden] = useState<boolean>(true);
-  const getCardTheme = (theme: string) => {
-    switch (theme) {
-      case "frameworks":
-        return frameworksCards;
-        break;
-      case "katuri":
-        return katuriCards;
-        break;
-      case "pawpatrol":
-        return pawpatrolCards;
-        break;
-      default:
-        return katuriCards;
-        break;
-    }
-  };
-
   const [cardsTheme, setCardsTheme] = useState<string>("katuri");
+  const [selectedCards, setSelectedCards] = useState<number[]>([]);
+  const isElementFlipped = (element: CardType) => element.isFlipped === true;
+  const [currentCards, setCurrentCards] = useState<CardType[]>([
+    ...getCardTheme(cardsTheme),
+  ]);
+
   const handleChangeCardTheme = (theme: string) => {
     setCardsTheme(theme);
   };
 
-  const [currentCards, setCurrentCards] = useState<CardType[]>([
-    ...getCardTheme(cardsTheme),
-  ]);
-  const [selectedCards, setSelectedCards] = useState<number[]>([]);
-
-  const flipNoMatchCards = (
-    firtsCardIndex: number,
-    secondCardIndex: number
-  ) => {
+  const noMatchCards = ({ firstIndex, secondIndex }: TwoCardsIndexProps) => {
     const a = currentCards;
-    a[firtsCardIndex].isFlipped = false;
-    a[secondCardIndex].isFlipped = false;
+    a[firstIndex].isFlipped = false;
+    a[secondIndex].isFlipped = false;
     setTimeout(() => {
       setCurrentCards([...a]);
       setSelectedCards([]);
     }, 500);
   };
 
-  const checkIfCardsMatch = (
-    firtsCardIndex: number,
-    secondCardIndex: number
-  ) => {
-    if (currentCards[firtsCardIndex].id === currentCards[secondCardIndex].id) {
-      flipNoMatchCards(firtsCardIndex, secondCardIndex);
-    }
-
-    if (
-      currentCards[firtsCardIndex].name === currentCards[secondCardIndex].name
-    ) {
-      console.log("match");
-      setSelectedCards([]);
-      if (currentCards.every(isElementFlipped)) {
-        setTimeout(() => {
-          setIsExploding(true);
-          setIsModalHidden(false);
-        }, 600);
-      }
-    } else {
-      console.log("not match");
-      flipNoMatchCards(firtsCardIndex, secondCardIndex);
+  const isEndGame = () => {
+    if (currentCards.every(isElementFlipped)) {
+      setTimeout(() => {
+        setIsExploding(true);
+        setIsModalHidden(false);
+      }, 600);
     }
   };
 
-  const isElementFlipped = (element: CardType) => element.isFlipped === true;
+  const compareCards = ({ firstIndex, secondIndex }: TwoCardsIndexProps) => {
+    if (
+      currentCards[firstIndex].id === currentCards[secondIndex].id ||
+      currentCards[firstIndex].name !== currentCards[secondIndex].name
+    ) {
+      noMatchCards({ firstIndex, secondIndex });
+    } else {
+      setSelectedCards([]);
+      isEndGame();
+    }
+  };
 
   useEffect(() => {
     if (selectedCards.length == 2) {
-      checkIfCardsMatch(selectedCards[0], selectedCards[1]);
+      const firstIndex = selectedCards[0];
+      const secondIndex = selectedCards[1];
+      compareCards({ firstIndex, secondIndex });
     }
   }, [selectedCards]);
 
-  const HandleClick = (index: number) => {
-    const nextState = [...selectedCards, index];
-    setSelectedCards(nextState);
+  const HandleCardClick = (index: number) => {
+    if (selectedCards.length < 2) {
+      currentCards[index].isFlipped = true;
+      const nextState = [...selectedCards, index];
+      setSelectedCards(nextState);
+    }
   };
 
   useEffect(() => {
@@ -113,12 +96,7 @@ function App() {
               <Card
                 key={card.id}
                 card={card}
-                onClick={() => {
-                  if (selectedCards.length < 2) {
-                    card.isFlipped = true;
-                    HandleClick(index);
-                  }
-                }}
+                onClick={() => HandleCardClick(index)}
               />
             );
           })}
