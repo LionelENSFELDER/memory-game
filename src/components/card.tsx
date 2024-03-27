@@ -1,11 +1,11 @@
-import backFaceLight from "../assets/img/back-face-light.jpg";
-import backFaceDark from "../assets/img/back-face-dark.jpg";
+import backFaceLightImg from "../assets/img/back-face-light.jpg";
+import backFaceDarkImg from "../assets/img/back-face-dark.jpg";
 import { CardType } from "../types";
 import { MouseEventHandler } from "react";
 
 const currentTheme = "light"; // TODO : make color theme switcher
 const backFace: string =
-  currentTheme === "light" ? backFaceLight : backFaceDark;
+  currentTheme === "light" ? backFaceLightImg : backFaceDarkImg;
 
 interface CardProps {
   card: CardType;

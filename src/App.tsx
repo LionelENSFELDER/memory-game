@@ -5,6 +5,12 @@ import Navbar from "./components/navbar";
 import Confetti from "./components/confetti";
 import Modal from "./components/win-modal";
 import getCardTheme from "./theme/get-card-theme";
+import useSound from "use-sound";
+import flipSound from "./assets/sound/flip.mp3";
+import matchSound from "./assets/sound/match.mp3";
+import noMatchSound from "./assets/sound/no-match.mp3";
+import winSound from "./assets/sound/win.mp3";
+import winVoiceSound from "./assets/sound/win-voice.mp3";
 import "./App.css";
 
 interface TwoCardsIndexProps {
@@ -18,6 +24,7 @@ function App() {
   const [cardsTheme, setCardsTheme] = useState<string>("katuri");
   const [selectedCards, setSelectedCards] = useState<number[]>([]);
   const isElementFlipped = (element: CardType) => element.isFlipped === true;
+
   const [currentCards, setCurrentCards] = useState<CardType[]>([
     ...getCardTheme(cardsTheme),
   ]);
@@ -25,6 +32,12 @@ function App() {
   const handleChangeCardTheme = (theme: string) => {
     setCardsTheme(theme);
   };
+
+  const [playFlipSound] = useSound(flipSound);
+  const [playMatchSound] = useSound(matchSound);
+  const [playNoMatchSound] = useSound(noMatchSound);
+  const [playWinSound] = useSound(winSound);
+  const [playWinVoiceSound] = useSound(winVoiceSound);
 
   const noMatchCards = ({ firstIndex, secondIndex }: TwoCardsIndexProps) => {
     const a = currentCards;
@@ -39,6 +52,8 @@ function App() {
   const isEndGame = () => {
     if (currentCards.every(isElementFlipped)) {
       setTimeout(() => {
+        playWinSound();
+        playWinVoiceSound();
         setIsExploding(true);
         setIsModalHidden(false);
       }, 600);
@@ -50,8 +65,10 @@ function App() {
       currentCards[firstIndex].id === currentCards[secondIndex].id ||
       currentCards[firstIndex].name !== currentCards[secondIndex].name
     ) {
+      playNoMatchSound();
       noMatchCards({ firstIndex, secondIndex });
     } else {
+      playMatchSound();
       setSelectedCards([]);
       isEndGame();
     }
@@ -66,6 +83,7 @@ function App() {
   }, [selectedCards]);
 
   const HandleCardClick = (index: number) => {
+    playFlipSound();
     if (selectedCards.length < 2) {
       currentCards[index].isFlipped = true;
       const nextState = [...selectedCards, index];
