@@ -5,6 +5,7 @@ import Navbar from "./components/navbar";
 import Confetti from "./components/confetti";
 import Modal from "./components/win-modal";
 import getCardTheme from "./theme/get-card-theme";
+// @ts-ignore
 import useSound from "use-sound";
 import flipSound from "./assets/sound/flip.mp3";
 import matchSound from "./assets/sound/match.mp3";
