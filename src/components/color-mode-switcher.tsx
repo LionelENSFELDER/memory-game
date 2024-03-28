@@ -1,17 +1,11 @@
-import { useState } from "react";
 import useDarkMode from "../hooks/useDarkMode";
-// import { DarkModeSwitch } from "react-toggle-dark-mode";
 import { Moon, Sun } from "lucide-react";
 
 export default function ColorModeSwitcher() {
   const [colorTheme, setColorTheme] = useDarkMode();
-  const [darkSide, setDarkSide] = useState(
-    colorTheme === "light" ? true : false
-  );
 
-  const toggleDarkMode = (checked) => {
-    setColorTheme(colorTheme);
-    setDarkSide(checked);
+  const toggleDarkMode = () => {
+    colorTheme === "light" ? setColorTheme("dark") : setColorTheme("light");
   };
 
   return (
