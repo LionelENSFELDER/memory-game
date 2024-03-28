@@ -1,11 +1,7 @@
-import backFaceLightImg from "../assets/img/back-face-light.jpg";
-import backFaceDarkImg from "../assets/img/back-face-dark.jpg";
+import backLight from "../assets/img/back-face-light.jpg";
+import backDark from "../assets/img/back-face-dark.jpg";
 import { CardType } from "../types";
 import { MouseEventHandler } from "react";
-
-const currentTheme = "light"; // TODO : make color theme switcher
-const backFace: string =
-  currentTheme === "light" ? backFaceLightImg : backFaceDarkImg;
 
 interface CardProps {
   card: CardType;
@@ -34,8 +30,13 @@ const Card = ({ card, onClick }: CardProps) => {
       data-testid={card.id}
     >
       <img
-        className="rounded-lg w-full h-full object-scale-down"
-        src={card.isFlipped ? card.image : backFace}
+        className="block dark:hidden rounded-lg w-full h-full object-scale-down"
+        src={card.isFlipped ? card.image : backLight}
+        alt="Card"
+      />
+      <img
+        className="hidden dark:block rounded-lg w-full h-full object-scale-down"
+        src={card.isFlipped ? card.image : backDark}
         alt="Card"
       />
     </div>

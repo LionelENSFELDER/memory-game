@@ -97,7 +97,7 @@ function App() {
   }, [cardsTheme]);
 
   return (
-    <div className="bg-gray-900 sm:h-fit md:h-screen">
+    <div className="bg-white dark:bg-gray-900 sm:h-fit md:h-screen">
       <Modal isHidden={IsModalHidden} />
       {isExploding && (
         <Confetti

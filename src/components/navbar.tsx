@@ -1,17 +1,20 @@
-import { useState } from "react";
-import { Brain, VolumeX, Volume2, RefreshCcw } from "lucide-react";
+import { Brain, RefreshCcw } from "lucide-react";
+import ColorModeSwitcher from "../components/color-mode-switcher";
 
 interface NavbarProps {
   setCardsTheme: (theme: string) => void;
 }
+
 const Navbar = ({ setCardsTheme }: NavbarProps) => {
-  const [isSoundActive, setIsSoundActive] = useState(true);
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
-          <Brain className="text-white" size={"3rem"} />
-          <h1 className="text-white">Memory Game</h1>
+        <a
+          href="#"
+          className="flex items-center space-x-3 rtl:space-x-reverse text-black dark:text-white"
+        >
+          <Brain size={"3rem"} />
+          <h1>Memory Game</h1>
         </a>
         <button
           data-collapse-toggle="navbar-default"
@@ -24,7 +27,7 @@ const Navbar = ({ setCardsTheme }: NavbarProps) => {
           <svg
             className="w-5 h-5"
             aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
+            xmlns="http:www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 17 14"
           >
@@ -37,7 +40,7 @@ const Navbar = ({ setCardsTheme }: NavbarProps) => {
             />
           </svg>
         </button>
-        <div className="hidden w-full md:block md:w-auto" id="navbar">
+        <div className="hidden w-full md:block md:w-auto" id="navbar-default">
           <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
             <li>
               <form className="max-w-sm mx-auto">
@@ -60,22 +63,14 @@ const Navbar = ({ setCardsTheme }: NavbarProps) => {
               <button
                 type="button"
                 className="text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500"
-                onClick={() => setIsSoundActive(!isSoundActive)}
-              >
-                {isSoundActive ? <Volume2 /> : <VolumeX />}
-
-                <span className="sr-only">Icon description</span>
-              </button>
-            </li>
-            <li>
-              <button
-                type="button"
-                className="text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500"
                 onClick={() => window.location.reload()}
               >
                 <RefreshCcw />
                 <span className="sr-only">Icon description</span>
               </button>
+            </li>
+            <li>
+              <ColorModeSwitcher />
             </li>
           </ul>
         </div>
