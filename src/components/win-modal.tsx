@@ -17,7 +17,7 @@ const Modal = ({ isHidden }: ModalProps) => {
         <div className="relative bg-transparent rounded-lg shadow">
           <div className="flex flex-col justify-center items-center gap-5 p-4 md:p-5 text-center">
             <Lottie animationData={partyAnimation} />
-            <h1 className="mb-5 text-2xl font-normal text-gray-500 dark:text-white">
+            <h1 className="mb-5 text-2xl font-normal text-white">
               Bravo tu as gagné !
             </h1>
           </div>

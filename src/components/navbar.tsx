@@ -49,7 +49,7 @@ const Navbar = ({ setCardsTheme }: NavbarProps) => {
                     setCardsTheme(event.target.value)
                   }
                   id="cards-theme"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className="bg-white border border-gray-300 text-black text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5 dark:bg-white dark:border-white dark:placeholder-black dark:text-black dark:focus:ring-white dark:focus:border-white"
                 >
                   <option selected value="katuri">
                     Katuri
@@ -62,7 +62,7 @@ const Navbar = ({ setCardsTheme }: NavbarProps) => {
             <li>
               <button
                 type="button"
-                className="text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500"
+                className="text-black border border-black hover:bg-black hover:text-white focus:ring-4 focus:outline-none focus:ring-black font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2 dark:border-white dark:text-white dark:hover:text-black dark:focus:ring-white dark:hover:bg-white"
                 onClick={() => window.location.reload()}
               >
                 <RefreshCcw />
