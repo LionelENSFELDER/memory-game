@@ -1,7 +1,8 @@
-import katuriCards from "../data/katuri-cards";
-import frameworksCards from "../data/frameworks-cards";
-import pawpatrolCards from "../data/pawpatrol-cards";
+import katuriCards from "../data/katuri";
+import frameworksCards from "../data/frameworks";
+import pawpatrolCards from "../data/pawpatrol";
 import superHerosCards from "../data/superheros";
+import superPatrolCards from "../data/superpatrol";
 
 export default function getCardTheme(theme: string) {
   switch (theme) {
@@ -16,6 +17,9 @@ export default function getCardTheme(theme: string) {
       break;
     case "superheros":
       return superHerosCards;
+      break;
+    case "superpatrol":
+      return superPatrolCards;
       break;
     default:
       return katuriCards;
