@@ -56,6 +56,7 @@ const Navbar = ({ setCardsTheme }: NavbarProps) => {
                   </option>
                   <option value="frameworks">Frameworks</option>
                   <option value="pawpatrol">Paw Patrol</option>
+                  <option value="superheros">Super Heros</option>
                 </select>
               </form>
             </li>
